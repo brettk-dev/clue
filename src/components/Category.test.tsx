@@ -27,6 +27,24 @@ describe('Category', () => {
     expect(suspectElements).toHaveLength(3)
   })
 
+  it('hides the suspects when the header is clicked', () => {
+    const suspects = ['Green', 'Mustard', 'Peacock']
+    render(<Category name="People" suspects={suspects} />)
+    const headerElement = screen.getByText('People')
+    headerElement.click()
+    const suspectElements = screen.queryAllByTestId('suspect')
 
-  it('hides the suspects when the header is clicked', () => {})
+    expect(suspectElements).toHaveLength(0)
+  })
+
+  it('shows the suspects when the header is clicked twice', () => {
+    const suspects = ['Green', 'Mustard', 'Peacock']
+    render(<Category name="People" suspects={suspects} />)
+    const headerElement = screen.getByText('People')
+    headerElement.click()
+    headerElement.click()
+    const suspectElements = screen.queryAllByTestId('suspect')
+
+    expect(suspectElements).toHaveLength(3)
+  })
 })
