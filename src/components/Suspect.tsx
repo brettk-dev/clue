@@ -17,6 +17,7 @@ export const Suspect = (props: Props) => {
     <li
       className={classes}
       onClick={() => setIsCleared(!isCleared)}
+      data-testid="suspect"
     >
       {name}
     </li>
