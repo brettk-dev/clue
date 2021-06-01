@@ -11,6 +11,14 @@ describe('Category', () => {
     expect(categoryElement.tagName).toBe('UL')
   })
 
+  it('renders a list item with the name in it', () => {
+    render(<Category name="People" />)
+    const headerElement = screen.getByText('People')
+
+    expect(headerElement).toBeInTheDocument()
+    expect(headerElement.tagName).toBe('LI')
+  })
+
   it('renders a given list of suspects', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
     render(<Category suspects={suspects} />)
@@ -18,4 +26,7 @@ describe('Category', () => {
 
     expect(suspectElements).toHaveLength(3)
   })
+
+
+  it('hides the suspects when the header is clicked', () => {})
 })
