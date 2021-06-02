@@ -12,7 +12,6 @@ export const toggleSuspect = (categoryName: string, suspectName: string) => ({
   suspectName
 })
 
-export const resetSuspects = (categoryName: string) => ({
-  type: SuspectActionType.RESET,
-  categoryName
+export const resetSuspects = () => ({
+  type: SuspectActionType.RESET
 })

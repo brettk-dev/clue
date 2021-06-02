@@ -47,17 +47,26 @@ describe('suspect reducer', () => {
         { name: 'Green', isCleared: true },
         { name: 'Mustard', isCleared: false },
         { name: 'Peacock', isCleared: true }
+      ],
+      Weapons: [
+        { name: 'Candlestick', isCleared: true },
+        { name: 'Dagger', isCleared: false },
+        { name: 'Lead Pipe', isCleared: true }
       ]
     }
 
     expect(suspects(state, {
-      type: SuspectActionType.RESET,
-      categoryName: 'People'
+      type: SuspectActionType.RESET
     })).toEqual({
       People: [
         { name: 'Green', isCleared: false },
         { name: 'Mustard', isCleared: false },
         { name: 'Peacock', isCleared: false }
+      ],
+      Weapons: [
+        { name: 'Candlestick', isCleared: false },
+        { name: 'Dagger', isCleared: false },
+        { name: 'Lead Pipe', isCleared: false }
       ]
     })
   })

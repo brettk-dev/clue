@@ -15,7 +15,7 @@ export enum SuspectActionType {
 
 export interface SuspectAction {
   type: SuspectActionType
-  categoryName: string
+  categoryName?: string
   suspectName?: string
   suspectList?: Suspect[]
 }
@@ -26,11 +26,13 @@ export const suspects = (state: SuspectState = {}, action?: SuspectAction): Susp
   }
   switch (action.type) {
     case SuspectActionType.SET:
+      if (!action.categoryName) return state
       return {
         ...state,
         [action.categoryName]: action.suspectList ?? []
       }
     case SuspectActionType.TOGGLE:
+      if (!action.categoryName) return state
       return {
         ...state,
         [action.categoryName]: (state[action.categoryName] ?? []).map(suspect => {
@@ -40,11 +42,11 @@ export const suspects = (state: SuspectState = {}, action?: SuspectAction): Susp
         })
       }
     case SuspectActionType.RESET:
-      return {
-        ...state,
-        [action.categoryName]: (state[action.categoryName] ?? []).map(suspect => ({ ...suspect, isCleared: false }))
-      }
+      return Object.keys(state).reduce((newState, category) => ({
+        ...newState,
+        [category]: state[category].map(suspect => ({ ...suspect, isCleared: false }))
+      }), {})
+    default:
+      return {}
   }
-
-  return {}
 }

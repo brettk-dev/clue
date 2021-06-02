@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Board, BoardType } from './components/Board'
 import styles from './App.module.scss'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { resetSuspects } from './store/actions'
 
 export const App = () => {
   const [character, setCharacter] = useState('Green')
   const [board, setBoard] = useState<BoardType>('Mansion')
+  const dispatch: Dispatch<any> = useDispatch()
 
   const verifyBoard = (value: string) => {
     if (value === 'Mansion' || value === 'Boardwalk') {
@@ -40,7 +44,7 @@ export const App = () => {
       <header className={styles.header}>
         <h1 className={styles.title}>Clue Companion</h1>
         <div className={styles.controls}>
-          <button className={styles.reset}>
+          <button className={styles.reset} onClick={() => dispatch(resetSuspects())}>
             Reset
           </button>
           <select

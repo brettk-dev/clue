@@ -27,7 +27,7 @@ describe('Category', () => {
 
   it('renders a given list of suspects', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
-    render(<Provider store={store}><Category suspects={suspects} /></Provider>)
+    render(<Provider store={store}><Category name="People" suspects={suspects} /></Provider>)
     const suspectElements = screen.getAllByTestId('suspect')
 
     expect(suspectElements).toHaveLength(3)

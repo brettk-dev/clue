@@ -23,9 +23,8 @@ describe('suspect actions', () => {
   })
 
   it('creates a RESET action', () => {
-    expect(actions.resetSuspects('People')).toEqual({
-      type: SuspectActionType.RESET,
-      categoryName: 'People'
+    expect(actions.resetSuspects()).toEqual({
+      type: SuspectActionType.RESET
     })
   })
 })
