@@ -1,4 +1,4 @@
-import { Suspect, SuspectActionType } from '../reducers/suspect'
+import { SuspectActionType } from '../reducers/suspect'
 
 export const setSuspects = (categoryName: string, suspectNames: string[]) => ({
   type: SuspectActionType.SET,

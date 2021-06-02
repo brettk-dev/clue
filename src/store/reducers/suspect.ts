@@ -45,4 +45,6 @@ export const suspects = (state: SuspectState = {}, action?: SuspectAction): Susp
         [action.categoryName]: (state[action.categoryName] ?? []).map(suspect => ({ ...suspect, isCleared: false }))
       }
   }
+
+  return {}
 }

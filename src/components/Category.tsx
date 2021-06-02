@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
+import { Dispatch } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSuspects, toggleSuspect } from '../store/actions'
 import { Suspect } from './Suspect'
 import styles from './Category.module.scss'
+import { SuspectState } from '../store/reducers/suspect'
 
 export interface CategoryData {
   name: string
@@ -9,27 +13,16 @@ export interface CategoryData {
 
 interface Props extends Partial<CategoryData> {}
 
-export const Category = (props: Props) => {
+export const Category: FC<Props> = (props) => {
   const name = props.name ?? ''
-  const suspectsFromProps = props.suspects ?? []
 
   const [open, setOpen] = useState(true)
-  const [suspects, setSuspects] = useState(suspectsFromProps.map(name => ({
-    name,
-    isCleared: false
-  })))
+  const suspects = useSelector((state: {suspects: SuspectState}) => state.suspects[name]) ?? []
+  const dispatch: Dispatch<any> = useDispatch()
 
-  const setIsCleared = (name: string, value: boolean) => {
-    setSuspects(suspects.map(sus => {
-      if (sus.name === name) {
-        return {
-          ...sus,
-          isCleared: value
-        }
-      }
-      return sus
-    }))
-  }
+  useEffect(() => {
+    dispatch(setSuspects(name, props.suspects ?? []))
+  }, [dispatch, props.suspects, name])
 
   return (
     <ul className={styles.list} data-testid="category">
@@ -46,21 +39,21 @@ export const Category = (props: Props) => {
         </div>
       </li>
 
-      {open && suspects.filter(suspect => !suspect.isCleared).map(suspect => (
+      {open && suspects && suspects.filter(suspect => !suspect.isCleared).map(suspect => (
         <Suspect
           key={suspect.name}
           name={suspect.name}
           isCleared={suspect.isCleared}
-          setIsCleared={(value) => setIsCleared(suspect.name, value)}
+          onToggle={() => dispatch(toggleSuspect(name, suspect.name))}
         />
       ))}
 
-      {open && suspects.filter(suspect => suspect.isCleared).map(suspect => (
+      {open && suspects && suspects.filter(suspect => suspect.isCleared).map(suspect => (
         <Suspect
           key={suspect.name}
           name={suspect.name}
           isCleared={suspect.isCleared}
-          setIsCleared={(value) => setIsCleared(suspect.name, value)}
+          onToggle={() => dispatch(toggleSuspect(name, suspect.name))}
         />
       ))}
     </ul>

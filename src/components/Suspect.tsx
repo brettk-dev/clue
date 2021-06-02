@@ -1,15 +1,16 @@
+import { FC } from 'react'
 import styles from './Suspect.module.scss'
 
 interface Props {
   name?: string
   isCleared?: boolean
-  setIsCleared?: (isCleared: boolean) => void
+  onToggle?: () => void
 }
 
-export const Suspect = (props: Props) => {
+export const Suspect: FC<Props> = (props) => {
   const name = props.name ?? ''
   const isCleared = props.isCleared ?? false
-  const setIsCleared = props.setIsCleared ?? (() => {})
+  const onToggle = props.onToggle ?? (() => {})
 
   const classes = isCleared
     ? `${styles.suspect} ${styles.cleared}`
@@ -18,7 +19,7 @@ export const Suspect = (props: Props) => {
   return (
     <li
       className={classes}
-      onClick={() => setIsCleared(!isCleared)}
+      onClick={() => onToggle()}
       data-testid="suspect"
     >
       {name}

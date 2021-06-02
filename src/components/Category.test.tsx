@@ -1,10 +1,15 @@
 import { render, screen } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { rootReducer } from '../store/reducers'
 
 import { Category } from './Category'
 
+const store = createStore(rootReducer, { suspects: {} })
+
 describe('Category', () => {
   it('renders an unordered list', () => {
-    render(<Category />)
+    render(<Provider store={store}><Category /></Provider>)
     const categoryElement = screen.getByTestId('category')
 
     expect(categoryElement).toBeInTheDocument()
@@ -12,7 +17,7 @@ describe('Category', () => {
   })
 
   it('has a header with an indicator and a title', () => {
-    render(<Category name="People" />)
+    render(<Provider store={store}><Category name="People" /></Provider>)
     const indicatorElement = screen.queryByText('-')
     const titleElement = screen.queryByText('People')
 
@@ -22,7 +27,7 @@ describe('Category', () => {
 
   it('renders a given list of suspects', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
-    render(<Category suspects={suspects} />)
+    render(<Provider store={store}><Category suspects={suspects} /></Provider>)
     const suspectElements = screen.getAllByTestId('suspect')
 
     expect(suspectElements).toHaveLength(3)
@@ -30,7 +35,7 @@ describe('Category', () => {
 
   it('hides the suspects when the header is clicked', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
-    render(<Category name="People" suspects={suspects} />)
+    render(<Provider store={store}><Category name="People" suspects={suspects} /></Provider>)
     const headerElement = screen.getByTestId('category-header')
     headerElement.click()
     const indicatorElement = screen.queryByText('+')
@@ -42,7 +47,7 @@ describe('Category', () => {
 
   it('shows the suspects when the header is clicked twice', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
-    render(<Category name="People" suspects={suspects} />)
+    render(<Provider store={store}><Category name="People" suspects={suspects} /></Provider>)
     const headerElement = screen.getByTestId('category-header')
     headerElement.click()
     headerElement.click()
@@ -54,7 +59,7 @@ describe('Category', () => {
   })
 
   it('renders a list item with the name in it', () => {
-    render(<Category name="People" />)
+    render(<Provider store={store}><Category name="People" /></Provider>)
     const headerElement = screen.getByTestId('category-header')
 
     expect(headerElement).toBeInTheDocument()
@@ -63,7 +68,7 @@ describe('Category', () => {
 
   it('reorders the suspects based upon their cleared status', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
-    render(<Category name="People" suspects={suspects} />)
+    render(<Provider store={store}><Category name="People" suspects={suspects} /></Provider>)
     const greenElement = screen.getByText('Green')
     greenElement.click()
     const suspectElements = screen.getAllByTestId('suspect')
@@ -75,7 +80,7 @@ describe('Category', () => {
 
   it('reorders the suspects based upon their cleared status when clicked in an awkward order', () => {
     const suspects = ['Green', 'Mustard', 'Peacock']
-    render(<Category name="People" suspects={suspects} />)
+    render(<Provider store={store}><Category name="People" suspects={suspects} /></Provider>)
     const greenElement = screen.getByText('Green')
     const mustardElement = screen.getByText('Mustard')
     greenElement.click()

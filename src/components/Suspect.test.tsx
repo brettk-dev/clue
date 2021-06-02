@@ -11,21 +11,12 @@ describe('Suspect', () => {
     expect(liElement.tagName).toBe('LI')
   })
 
-  it('emits an is cleared change request when starting with false and is clicked', () => {
-    const setIsCleared = jest.fn()
-    render(<Suspect name="SuspectName" isCleared={false} setIsCleared={setIsCleared} />)
+  it('emits an onToggle event when it is clicked', () => {
+    const handleToggle = jest.fn()
+    render(<Suspect name="SuspectName" isCleared={false} onToggle={handleToggle} />)
     const liElement = screen.getByTestId('suspect')
     liElement.click()
 
-    expect(setIsCleared).toHaveBeenCalledWith(true)
-  })
-
-  it('emits a not cleared change request when starting with true and clicked', () => {
-    const setIsCleared = jest.fn()
-    render(<Suspect name="SuspectName" isCleared={true} setIsCleared={setIsCleared} />)
-    const liElement = screen.getByTestId('suspect')
-    liElement.click()
-
-    expect(setIsCleared).toHaveBeenCalledWith(false)
+    expect(handleToggle).toHaveBeenCalledTimes(1)
   })
 })

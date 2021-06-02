@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import { suspectReducer } from './suspect'
+import { suspects } from './suspect'
 
-export const rootReducer = combineReducers({})
+export const rootReducer = combineReducers({ suspects })
