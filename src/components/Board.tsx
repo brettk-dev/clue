@@ -1,15 +1,9 @@
-import {Category} from './Category'
+import { Category, CategoryData } from './Category'
+import styles from './Board.module.scss'
 
-type BoardType = 'Mansion' | 'Boardwalk'
+export type BoardType = 'Mansion' | 'Boardwalk'
 
-interface BoardData {
-  [key: BoardType]: [
-    {
-      name: string
-      suspects: string[]
-    }
-  ]
-}
+type BoardData = Record<BoardType, CategoryData[]>
 
 const boards: BoardData = {
   Mansion: [
@@ -47,16 +41,13 @@ interface Props {
 }
 
 export const Board = (props: Props) => {
-  const name = props.name ?? ''
+  const name = props.name ?? 'Mansion'
 
   const categories = boards[name] ?? []
 
-  const boardClass = 'clue-board'
-  const titleClass = `${boardClass}__title`
-
   return (
-    <div className={boardClass} data-testid="board">
-      <h2 className={titleClass}>{name}</h2>
+    <div className={styles.board} data-testid="board">
+      <h2 className={styles.title}>{name}</h2>
 
       {categories.map(category => (
         <Category

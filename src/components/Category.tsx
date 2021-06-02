@@ -1,10 +1,13 @@
-import {useState} from 'react'
-import {Suspect} from './Suspect'
+import { useState } from 'react'
+import { Suspect } from './Suspect'
+import styles from './Category.module.scss'
 
-interface Props {
-  name?: string
-  suspects?: string[]
+export interface CategoryData {
+  name: string
+  suspects: string[]
 }
+
+interface Props extends Partial<CategoryData> {}
 
 export const Category = (props: Props) => {
   const name = props.name ?? ''
@@ -12,22 +15,17 @@ export const Category = (props: Props) => {
 
   const [open, setOpen] = useState(true)
 
-  const listClass = 'suspect-list'
-  const headerClass = `${listClass}__header`
-  const indicatorClass = `${listClass}__indicator`
-  const titleClass = `${listClass}__title`
-
   return (
-    <ul className={listClass} data-testid="category">
+    <ul className={styles.list} data-testid="category">
       <li
-        className={headerClass}
+        className={styles.header}
         onClick={() => setOpen(!open)}
         data-testid="category-header"
       >
-        <div className={indicatorClass}>
+        <div className={styles.indicator}>
           {open ? '-' : '+'}
         </div>
-        <div className={titleClass}>
+        <div className={styles.title}>
           {name}
         </div>
       </li>

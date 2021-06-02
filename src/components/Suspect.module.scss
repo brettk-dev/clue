@@ -1,0 +1,13 @@
+$cellHeight: 36px;
+
+.suspect {
+    cursor: pointer;
+    height: $cellHeight;
+    line-height: $cellHeight;
+    padding: 0 16px;
+    transition: var(--transition);
+
+    &:hover {
+        background: var(--color--theme-100);
+    }
+}

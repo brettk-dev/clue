@@ -1,0 +1,37 @@
+$colors: ("green": 126, "mustard": 60, "peacock": 230, "plum": 280, "scarlett": 0);
+
+:root {
+    @each $name, $hue in $colors {
+        --color--#{$name}-100: hsl(#{$hue}, 95%, 92%);
+        --color--#{$name}-300: hsl(#{$hue}, 75%, 78%);
+        --color--#{$name}-500: hsl(#{$hue}, 55%, 32%);
+        --color--#{$name}-700: hsl(#{$hue}, 45%, 22%);
+        --color--#{$name}-900: hsl(#{$hue}, 35%, 12%);
+    }
+    --color--white--100:hsl(0, 0%, 90%);
+    --color--white--300:hsl(0, 0%, 70%);
+    --color--white--500:hsl(0, 0%, 50%);
+    --color--white--700:hsl(0, 0%, 30%);
+    --color--white--900:hsl(0, 0%, 10%);
+    
+    --color--theme-100: var(--color--green-100);
+    --color--theme-300: var(--color--green-300);
+    --color--theme-500: var(--color--green-500);
+    --color--theme-700: var(--color--green-700);
+    --color--theme-900: var(--color--green-900);
+
+    --radius: 4px;
+    --transition: 0.2s ease-out;
+}
+
+* {
+    font-family: sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: var(--color--theme-700);
+}

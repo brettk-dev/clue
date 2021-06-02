@@ -1,6 +1,6 @@
-import {render, screen} from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
-import {Category} from './Category'
+import { Category } from './Category'
 
 describe('Category', () => {
   it('renders an unordered list', () => {
@@ -53,21 +53,13 @@ describe('Category', () => {
     expect(suspectElements).toHaveLength(3)
   })
 
-  it('has the suspect-list class', () => {
-    render(<Category />)
-    const categoryElement = screen.getByTestId('category')
-
-    expect(categoryElement.classList).toHaveLength(1)
-    expect(categoryElement.classList.contains('suspect-list')).toBe(true)
-  })
-
   it('renders a list item with the name in it', () => {
     render(<Category name="People" />)
     const headerElement = screen.getByTestId('category-header')
 
     expect(headerElement).toBeInTheDocument()
     expect(headerElement.tagName).toBe('LI')
-    expect(headerElement.classList).toHaveLength(1)
-    expect(headerElement.classList.contains('suspect-list__header'))
   })
+
+  it('reorders the suspects based upon their cleared status', () => {})
 })

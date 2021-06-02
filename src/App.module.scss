@@ -1,0 +1,48 @@
+.header {
+    background: var(--color--theme-500);
+    color: var(--color--theme-100);
+    display: flex;
+    height: 64px;
+    justify-content: space-between;
+    padding: 0 32px;
+}
+
+.title {
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+.controls {
+    align-items: center;
+    display: flex;
+    & > * {
+        margin-left: 16px;
+    }
+}
+
+.reset {
+    background: var(--color--theme-500);
+    border: none;
+    border-radius: var(--radius);
+    color: var(--color--theme-100);
+    cursor: pointer;
+    padding: 8px;
+    transition: var(--transition);
+
+    &:hover {
+        background: var(--color--theme-700);
+    }
+}
+
+.select {
+    background: var(--color--theme-100);
+    border: none;
+    border-radius: var(--radius);
+    color: var(--color--theme-700);
+    padding: 4px 8px;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 512px;
+}

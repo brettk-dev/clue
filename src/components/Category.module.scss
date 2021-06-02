@@ -1,0 +1,34 @@
+$cellHeight: 48px;
+$indicatorSize: 2 * $cellHeight / 3;
+
+.list {
+    list-style: none;
+}
+
+.header {
+    align-items: center;
+    background: var(--color--theme-500);
+    border-radius: var(--radius);
+    color: var(--color--theme-100);
+    cursor: pointer;
+    display: flex;
+    height: $cellHeight;
+    margin: 8px 0;
+    padding: 0 8px;
+    transition: var(--transition);
+
+    &:hover {
+        background: var(--color--theme-700);
+    }
+}
+
+.indicator {
+    height: $indicatorSize;
+    line-height: $indicatorSize;
+    text-align: center;
+    width: $indicatorSize;
+}
+
+.title {
+    font-size: 1.2rem;
+}

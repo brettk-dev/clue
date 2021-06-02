@@ -9,7 +9,6 @@ describe('Board', () => {
 
     expect(boardElement).toBeInTheDocument()
     expect(boardElement.classList).toHaveLength(1)
-    expect(boardElement).toHaveClass('clue-board')
   })
 
   it('renders a title in an h2 with the class clue-board__title', () => {
@@ -18,7 +17,6 @@ describe('Board', () => {
 
     expect(titleElement.tagName).toBe('H2')
     expect(titleElement.classList).toHaveLength(1)
-    expect(titleElement).toHaveClass('clue-board__title')
   })
 
   it('renders the Mansion category for each "People", "Weapons" and "Places"', () => {
