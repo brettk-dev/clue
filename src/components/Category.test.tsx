@@ -61,5 +61,33 @@ describe('Category', () => {
     expect(headerElement.tagName).toBe('LI')
   })
 
-  it('reorders the suspects based upon their cleared status', () => {})
+  it('reorders the suspects based upon their cleared status', () => {
+    const suspects = ['Green', 'Mustard', 'Peacock']
+    render(<Category name="People" suspects={suspects} />)
+    const greenElement = screen.getByText('Green')
+    greenElement.click()
+    const suspectElements = screen.getAllByTestId('suspect')
+    const suspectList = suspectElements.map(el => el.textContent)
+
+    expect(suspectList).not.toEqual(['Green', 'Mustard', 'Peacock'])
+    expect(suspectList).toEqual(['Mustard', 'Peacock', 'Green'])
+  })
+
+  it('reorders the suspects based upon their cleared status when clicked in an awkward order', () => {
+    const suspects = ['Green', 'Mustard', 'Peacock']
+    render(<Category name="People" suspects={suspects} />)
+    const greenElement = screen.getByText('Green')
+    const mustardElement = screen.getByText('Mustard')
+    greenElement.click()
+    mustardElement.click()
+    // React creates new Elements, so we have to get the new references
+    const greenElement2 = screen.getByText('Green')
+    const mustardElement2 = screen.getByText('Mustard')
+    greenElement2.click()
+    mustardElement2.click()
+    const suspectElements = screen.getAllByTestId('suspect')
+    const suspectList = suspectElements.map(el => el.textContent)
+
+    expect(suspectList).toEqual(['Green', 'Mustard', 'Peacock'])
+  })
 })

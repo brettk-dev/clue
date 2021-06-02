@@ -11,3 +11,8 @@ $cellHeight: 36px;
         background: var(--color--theme-100);
     }
 }
+
+.cleared {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
