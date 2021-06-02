@@ -70,7 +70,7 @@ export const App = () => {
         </div>
       </header>
       <main className={styles.content}>
-        <Board name={board} />
+        <Board key={board} name={board} />
       </main>
     </>
   )
